@@ -48,7 +48,7 @@ defmodule Mix.Compilers.Phoenix.JsRoutes do
     if stale == [] && entries_to_remove == [] && files_to_remove == [] do
       :noop
     else
-      Mix.Project.ensure_structure()
+#      Mix.Project.ensure_structure()
 
       Enum.each(entries_to_remove ++ files_to_remove, &File.rm(elem(&1, 2)))
 

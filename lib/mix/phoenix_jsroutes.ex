@@ -1,7 +1,7 @@
 defmodule PhoenixJsroutes do
 
   def function_name(%{helper: helper, opts: opts}) do
-    "#{helper}_#{opts}" |> Mix.Utils.camelize |> downcase_first
+    "#{helper}_#{opts}" |> Macro.camelize |> downcase_first
   end
 
   defp downcase_first(<< first :: utf8, rest :: binary>>) do
@@ -15,8 +15,8 @@ defmodule PhoenixJsroutes do
     |> String.replace(":", "")
   end
 
-  def function_body(%{path: path}) do
-    PhoenixJsroutes.UrlTransformer.to_js(path)
+  def function_body(%{path: path}, url \\ nil) do
+    PhoenixJsroutes.UrlTransformer.to_js(path, url)
   end
 
   # just for tests, so we can run the task in this project.

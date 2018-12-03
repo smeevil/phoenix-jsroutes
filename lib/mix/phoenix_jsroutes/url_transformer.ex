@@ -1,7 +1,12 @@
 defmodule PhoenixJsroutes.UrlTransformer do
-  def to_js(path) do
+  def to_js(path, nil) do
     result = %{ index: 0, length: String.length(path), path: path, state: "start_path", code: "" }
     do_recur(result).code
+  end
+
+  def to_js(path, url) do
+    path = to_js(path, nil)
+    String.replace(path, ~r/^'/, "'#{url}")
   end
 
   defp consume(%{index: index} = result) do
